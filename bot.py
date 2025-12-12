@@ -3,6 +3,7 @@ import logging
 import os
 from dotenv import load_dotenv
 from ai_service import ask_gemini
+from keep_alive import start_server
 
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
@@ -384,7 +385,11 @@ async def approve(callback: CallbackQuery):
     except: pass
 
 async def main():
-    print("Bot is running...")
+    # Start the dummy web server first
+    start_server() 
+    print("🌍 Web Server started!")
+    
+    print("🤖 Bot is running...")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
